@@ -10,9 +10,16 @@ const Header = () => {
         <Link className={styles.logo} to="/" aria-label="July Blog - Home">
           <img src={JulyBlog} alt="July Blog - Home" width={30} />
         </Link>
-        <Link className={styles.login} to="/login">
-          Login / Criar conta
-        </Link>
+        <span className={styles.loginContainer}>
+          <Link className={styles.login} to="/login">
+            Login{' '}
+          </Link>
+          /
+          <Link className={styles.loginCreate} to="/login/criar">
+            {' '}
+            Criar conta
+          </Link>
+        </span>
       </nav>
     </header>
   );
