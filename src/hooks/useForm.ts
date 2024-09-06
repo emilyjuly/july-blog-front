@@ -27,7 +27,6 @@ const useForm = (type?: string) => {
   function validate(value: string) {
     if (!type) return true;
     if (value.length === 0) {
-      console.log(types[type].regex.test(value));
       setError('Preencha um valor');
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {
