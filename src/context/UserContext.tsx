@@ -26,6 +26,7 @@ interface UserContextType {
   error: string;
   userLogout: () => void;
   isLogged: boolean;
+  createUser: (username: string, email: string, password: string) => void;
 }
 
 export const UserContext = createContext<UserContextType | null>(null);
@@ -36,22 +37,19 @@ interface UserProviderProps {
 
 export function UserStorage({ children }: UserProviderProps) {
   const [data, setData] = useState<User | null>(null);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
-  const userLogout = useCallback(
-    async function () {
-      navigate('/');
-      setData(null);
-      setError('');
-      setLoading(false);
-      setIsLogged(false);
-      window.localStorage.removeItem('access_token');
-    },
-    [navigate],
-  );
+  const userLogout = useCallback(async function () {
+    navigate('/');
+    setData(null);
+    setError('');
+    setLoading(false);
+    setIsLogged(false);
+    window.localStorage.removeItem('access_token');
+  }, []);
 
   async function userLogin(username: string, password: string): Promise<void> {
     try {
@@ -67,6 +65,27 @@ export function UserStorage({ children }: UserProviderProps) {
     } catch (error: any) {
       setError(error.response.data.message);
       setIsLogged(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function createUser(
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<void> {
+    try {
+      setError('');
+      setLoading(true);
+      await api.post('users/create', {
+        username,
+        email,
+        password,
+      });
+      userLogin(username, password);
+    } catch (error: any) {
+      setError(error.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -94,6 +113,8 @@ export function UserStorage({ children }: UserProviderProps) {
       const token = window.localStorage.getItem('access_token');
       if (token) {
         getUser(token);
+      } else {
+        setIsLogged(false);
       }
     }
     autoLogin();
@@ -101,7 +122,15 @@ export function UserStorage({ children }: UserProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, data, loading, error, userLogout, isLogged }}
+      value={{
+        userLogin,
+        data,
+        loading,
+        error,
+        userLogout,
+        isLogged,
+        createUser,
+      }}
     >
       {children}
     </UserContext.Provider>

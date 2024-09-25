@@ -9,6 +9,7 @@ type InputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   error: string | null;
+  name?: string;
 };
 
 const Input = ({
@@ -20,6 +21,7 @@ const Input = ({
   onChange,
   error,
   onBlur,
+  name,
 }: InputProps) => {
   return (
     <div className={styles.wrapper}>
@@ -27,6 +29,7 @@ const Input = ({
         {label}:
       </label>
       <input
+        name={name}
         className={styles.input}
         title={title}
         placeholder={placeholder}
