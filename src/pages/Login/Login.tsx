@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import LoginForm from '../LoginForm/LoginForm';
-import LoginCreate from '../LoginCreate/LoginCreate';
-import LoginPasswordLost from '../LoginPasswordLost/LoginPasswordLost';
-import LoginPasswordReset from '../LoginPasswordReset/LoginPasswordReset';
+import LoginForm from "../LoginForm/LoginForm";
+import LoginCreate from "../LoginCreate/LoginCreate";
+import LoginPasswordLost from "../LoginPasswordLost/LoginPasswordLost";
+import LoginPasswordReset from "../LoginPasswordReset/LoginPasswordReset";
 
-import styles from './Login.module.css';
+import styles from "./Login.module.css";
 
 const Login = () => {
   const { isLogged } = useContext(UserContext);

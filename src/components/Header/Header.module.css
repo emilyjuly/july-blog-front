@@ -24,10 +24,10 @@
 }
 
 .loginContainer::after {
-  content: '';
+  content: "";
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: url('../../assets//usuario.svg');
+  background: url("../../assets//usuario.svg");
   margin-left: 0.5rem;
 }

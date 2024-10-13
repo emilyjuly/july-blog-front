@@ -1,22 +1,22 @@
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-import Error from '../../components/Helper/Error/Error';
-import useForm from '../../hooks/useForm';
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import Error from "../../components/Helper/Error/Error";
+import useForm from "../../hooks/useForm";
 
-import styles from './LoginForm.module.css';
-import stylesBtn from '../../components/Button/Button.module.css';
+import styles from "./LoginForm.module.css";
+import stylesBtn from "../../components/Button/Button.module.css";
 
 const LoginForm = () => {
-  const username = useForm('username');
-  const password = useForm('');
+  const username = useForm("username");
+  const password = useForm("");
   const { userLogin, loading, error } = useContext(UserContext);
 
   async function handleLogin(
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
 

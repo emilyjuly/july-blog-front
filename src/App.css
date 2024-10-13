@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap");
 
 * {
   box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 :root {
   --type-first: Helvetica, Arial, sans-serif;
-  --type-second: 'SUSE', georgia;
+  --type-second: "SUSE", georgia;
 }
 
 body {
@@ -64,7 +64,7 @@ a {
 }
 
 .title::after {
-  content: '';
+  content: "";
   display: block;
   width: 1.5rem;
   height: 1.5rem;

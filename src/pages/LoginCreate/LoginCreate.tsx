@@ -1,19 +1,19 @@
-import { useContext } from 'react';
-import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
-import { UserContext } from '../../context/UserContext';
-import useForm from '../../hooks/useForm';
-import styles from './LoginCreate.module.css';
-import Error from '../../components/Helper/Error/Error';
+import { useContext } from "react";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
+import { UserContext } from "../../context/UserContext";
+import useForm from "../../hooks/useForm";
+import styles from "./LoginCreate.module.css";
+import Error from "../../components/Helper/Error/Error";
 
 const LoginCreate = () => {
-  const username = useForm(' ');
-  const email = useForm('email');
-  const password = useForm('password');
+  const username = useForm(" ");
+  const email = useForm("email");
+  const password = useForm("password");
   const { createUser, error, loading } = useContext(UserContext);
 
   async function handleCreateUser(
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
 

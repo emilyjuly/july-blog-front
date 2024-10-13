@@ -1,4 +1,4 @@
-import styles from './Input.module.css';
+import styles from "./Input.module.css";
 
 type InputProps = {
   label: string;
@@ -21,7 +21,7 @@ const Input = ({
   onChange,
   error,
   onBlur,
-  name,
+  name
 }: InputProps) => {
   return (
     <div className={styles.wrapper}>

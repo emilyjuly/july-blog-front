@@ -1,4 +1,4 @@
-import styles from './LoginPasswordLost.module.css';
+import styles from "./LoginPasswordLost.module.css";
 
 const LoginPasswordLost = () => {
   return <div>LOGIN password lost</div>;

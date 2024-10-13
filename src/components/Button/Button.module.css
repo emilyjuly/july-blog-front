@@ -16,7 +16,9 @@
 .button:hover,
 .button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px #e9dfff, 0 0 0 4px #4f13cf;
+  box-shadow:
+    0 0 0 3px #e9dfff,
+    0 0 0 4px #4f13cf;
 }
 
 .button:disabled {

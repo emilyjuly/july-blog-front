@@ -1,4 +1,4 @@
-import style from './UserPhotoPost.module.css';
+import style from "./UserPhotoPost.module.css";
 
 const UserPhotoPost = () => {
   return <div>Postar photo</div>;
