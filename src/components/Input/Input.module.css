@@ -2,6 +2,11 @@
   margin-bottom: 1rem;
 }
 
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
 .input {
   border: 1px solid #eee;
   display: block;
@@ -32,4 +37,19 @@
   color: #c02e2e;
   font-size: 0.875rem;
   margin-top: 0.25rem;
+}
+
+.toggleButton {
+  border: none;
+  color: #4f13cf;
+  background: transparent;
+  text-decoration: underline;
+  align-self: flex-end;
+  margin-left: auto;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  color: black;
 }
