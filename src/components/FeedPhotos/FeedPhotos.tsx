@@ -6,7 +6,7 @@ import api from '../../api/api';
 import Error from '../Helper/Error/Error';
 import Loading from '../Helper/Loading/Loading';
 
-const FeedPhotos = () => {
+const FeedPhotos = ({ setModalPhoto }) => {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
   const [photos, setPhotos] = useState(null);
@@ -39,9 +39,13 @@ const FeedPhotos = () => {
   if (loading) return <Loading />;
   if (photos)
     return (
-      <ul>
+      <ul className={`${styles.feed} animeLeft`}>
         {photos.map((photo) => (
-          <FeedPhotosItem key={photo.id} photo={photo} />
+          <FeedPhotosItem
+            key={photo.id}
+            photo={photo}
+            setModalPhoto={setModalPhoto}
+          />
         ))}
       </ul>
     );

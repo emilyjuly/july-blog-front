@@ -26,6 +26,7 @@ const UserPhotoPost = () => {
     const formData = new FormData();
     formData.append('file', img.raw);
     formData.append('userId', data.id);
+    formData.append('username', data.username);
     formData.append('caption', caption.value);
 
     const token: string = window.localStorage.getItem('access_token');

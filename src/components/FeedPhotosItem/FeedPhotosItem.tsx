@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import styles from './FeedPhotosItem.module.css';
 
-const FeedPhotosItem = ({ photo }) => {
+const FeedPhotosItem = ({ photo, setModalPhoto }) => {
   const url: string = `http://localhost:3000/${photo.Photo.path}`;
-  useEffect(() => {
-    console.log(photo);
-  }, [photo]);
+
+  function handleClick() {
+    setModalPhoto(photo);
+  }
+
   return (
-    <li>
-      <img src={url} alt={photo.caption || 'Photo'} />
-      {photo.caption && <p className={styles.caption}>{photo.caption}</p>}
+    <li className={styles.photo} onClick={handleClick}>
+      <img className={styles.imagem} src={url} alt={photo.caption || 'Photo'} />
     </li>
   );
 };
