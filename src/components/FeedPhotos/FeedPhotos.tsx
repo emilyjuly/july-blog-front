@@ -23,7 +23,6 @@ const FeedPhotos = ({ setModalPhoto }) => {
               Authorization: `Bearer ${token}`,
             },
           });
-          console.log(res);
           setPhotos(res.data);
         } catch (error) {
           setError(error.message);

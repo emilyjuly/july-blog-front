@@ -11,12 +11,12 @@ const PhotoContent = ({ photo }) => {
         <img src={url} alt={photo.caption} />
         <div className={styles.details}>
           <div>
-            <p>
+            <p className={styles.author}>
               <Link to={`/perfil/${photo.userId}`}>@{photo.username}</Link>
               <span>{photo.caption}</span>
             </p>
             <h1 className="title">
-              <Link to={`/foto/${photo.id}`}>{photo.caption}</Link>
+              <p>{photo.username}</p>
             </h1>
           </div>
         </div>
