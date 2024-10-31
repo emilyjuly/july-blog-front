@@ -1,17 +1,13 @@
-.photoContent {
+.photoContentContainer {
   margin: auto;
   height: 36rem;
   background: white;
   border-radius: 0.2rem;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: scaleUp 0.3s ease-in-out forwards;
-}
-
-.photoContentContainer {
   display: grid;
   grid-template-columns: 36rem 20rem;
   overflow: hidden;
+  transform: scale(0.8);
+  animation: scaleUp 0.3s ease-in-out forwards;
 }
 
 .photoContentContainer img {

@@ -3,8 +3,9 @@ import styles from './PhotoCommentsForm.module.css';
 import send from '../../assets/send.svg';
 import { UserContext } from '../../context/UserContext';
 import api from '../../api/api';
+import Error from '../Helper/Error/Error';
 
-const PhotoCommentsForm = ({ id }) => {
+const PhotoCommentsForm = ({ id, setComments }) => {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,6 +24,7 @@ const PhotoCommentsForm = ({ id }) => {
             content: comment,
             postId: id,
             userId: data.id,
+            username: data.username,
           },
           {
             headers: {
@@ -31,7 +33,8 @@ const PhotoCommentsForm = ({ id }) => {
             },
           },
         );
-        console.log(await res);
+        setComment('');
+        setComments((comments) => [...comments, res.data]);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -52,6 +55,7 @@ const PhotoCommentsForm = ({ id }) => {
       <button>
         <img src={send} width={20} />
       </button>
+      {error && <Error error={error} />}
     </form>
   );
 };
