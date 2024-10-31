@@ -6,10 +6,10 @@ const PhotoContent = ({ photo }) => {
   const url: string = `http://localhost:3000/${photo.Photo.path}`;
 
   return (
-    <div className={styles.photo}>
-      <div className={styles.img}>
+    <div className={styles.photoContent}>
+      <div className={styles.photoContentContainer}>
         <img src={url} alt={photo.caption} />
-        <div className={styles.details}>
+        <div className={styles.detailsContainer}>
           <div>
             <p className={styles.author}>
               <Link to={`/perfil/${photo.userId}`}>@{photo.username}</Link>
@@ -21,7 +21,7 @@ const PhotoContent = ({ photo }) => {
           </div>
         </div>
       </div>
-      <PhotoComments comments={photo.Comments} />
+      <PhotoComments comments={photo} />
     </div>
   );
 };
