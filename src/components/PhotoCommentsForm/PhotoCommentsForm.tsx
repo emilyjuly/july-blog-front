@@ -4,6 +4,7 @@ import send from '../../assets/send.svg';
 import { UserContext } from '../../context/UserContext';
 import api from '../../api/api';
 import Error from '../Helper/Error/Error';
+import { ReactSVG } from 'react-svg';
 
 const PhotoCommentsForm = ({ id, setComments }) => {
   const [comment, setComment] = useState('');
@@ -46,13 +47,14 @@ const PhotoCommentsForm = ({ id, setComments }) => {
   return (
     <form className={styles.commentsContainer} onSubmit={handleSubmit}>
       <textarea
+        className={styles.textarea}
         id="comment"
         name="comment"
         placeholder="Comente"
         value={comment}
         onChange={({ target }) => setComment(target.value)}
       />
-      <button>
+      <button className={styles.button}>
         <img src={send} width={20} />
       </button>
       {error && <Error error={error} />}
