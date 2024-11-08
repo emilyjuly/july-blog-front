@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styles from './FeedPhotosItem.module.css';
+import Image from '../Helper/Image/Image';
 
 const FeedPhotosItem = ({ photo, setModalPhoto }) => {
   const url: string = `http://localhost:3000/${photo.Photo.path}`;
@@ -10,7 +11,7 @@ const FeedPhotosItem = ({ photo, setModalPhoto }) => {
 
   return (
     <li className={styles.photo} onClick={handleClick}>
-      <img className={styles.imagem} src={url} alt={photo.caption || 'Photo'} />
+      <Image src={url} alt={photo.caption || 'Photo'} />
     </li>
   );
 };

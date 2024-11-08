@@ -5,24 +5,38 @@ import { UserContext } from '../../context/UserContext';
 import api from '../../api/api';
 import Error from '../Helper/Error/Error';
 import Loading from '../Helper/Loading/Loading';
+import { useLocation } from 'react-router-dom';
 
 const FeedPhotos = ({ setModalPhoto }) => {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
   const [photos, setPhotos] = useState(null);
   const { data } = useContext(UserContext);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchPhotos() {
-      const token: string = window.localStorage.getItem('access_token');
-      if (token) {
+      setLoading(true);
+
+      if (location.pathname.includes('/conta')) {
+        const token: string = window.localStorage.getItem('access_token');
+        if (token) {
+          try {
+            const res = await api.get(`/posts/${data.id}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            setPhotos(res.data);
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setLoading(false);
+          }
+        }
+      } else {
         try {
-          setLoading(true);
-          const res = await api.get(`/posts/${data.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const res = await api.get(`/posts`);
           setPhotos(res.data);
         } catch (error) {
           setError(error.message);

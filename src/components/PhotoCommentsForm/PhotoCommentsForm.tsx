@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './PhotoCommentsForm.module.css';
 import send from '../../assets/send.svg';
 import { UserContext } from '../../context/UserContext';
@@ -12,7 +12,9 @@ const PhotoCommentsForm = ({ id, setComments }) => {
   const [error, setError] = useState('');
   const { data } = useContext(UserContext);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> {
     event.preventDefault();
     const token: string = window.localStorage.getItem('access_token');
 

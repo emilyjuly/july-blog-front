@@ -4,12 +4,14 @@ import { UserContext } from '../../context/UserContext';
 import PhotoCommentsForm from '../PhotoCommentsForm/PhotoCommentsForm';
 
 const PhotoComments = (props) => {
-  const [comments, setComments] = useState(() => props.comments.Comments);
+  const [comments, setComments] = useState(() => props.photo.Comments);
   const { isLogged } = useContext(UserContext);
   const commentsSection = useRef(null);
 
   useEffect(() => {
-    commentsSection.current.scrollTop = commentsSection.current.scrollHeight;
+    if (comments.length > 0) {
+      commentsSection.current.scrollTop = commentsSection.current.scrollHeight;
+    }
   }, [comments]);
 
   return (
@@ -25,7 +27,7 @@ const PhotoComments = (props) => {
         </ul>
       )}
       {isLogged && (
-        <PhotoCommentsForm id={props.comments.id} setComments={setComments} />
+        <PhotoCommentsForm id={props.photo.id} setComments={setComments} />
       )}
     </>
   );

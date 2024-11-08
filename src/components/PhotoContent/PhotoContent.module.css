@@ -1,17 +1,21 @@
 .photoContentContainer {
   margin: auto;
-  height: 36rem;
   background: white;
   border-radius: 0.2rem;
   display: grid;
   grid-template-columns: 36rem 20rem;
-  overflow: hidden;
+  grid-template-rows: auto 1fr;
   transform: scale(0.8);
   animation: scaleUp 0.3s ease-in-out forwards;
+  overflow: hidden;
+  max-height: 80vh;
 }
 
-.photoContentContainer img {
-  border-radius: 0.2rem;
+.img {
+  object-fit: cover;
+  max-height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .detailsContainer {
@@ -19,6 +23,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
+  overflow: auto;
 }
 
 @keyframes scaleUp {

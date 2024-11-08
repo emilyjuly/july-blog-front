@@ -50,6 +50,38 @@ const UserPhotoPost = () => {
   }
 
   function handleImgChange({ target }): void {
+    const file = target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const size = Math.min(img.width, img.height);
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext('2d');
+
+          const startX = (img.width - size) / 2;
+          const startY = (img.height - size) / 2;
+          ctx.drawImage(img, startX, startY, size, size, 0, 0, size, size);
+
+          // Converter o canvas para um blob
+          canvas.toBlob((blob) => {
+            if (blob) {
+              setImg({
+                preview: URL.createObjectURL(blob),
+                raw: new File([blob], file.name, { type: file.type }),
+              });
+            }
+          }, file.type);
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+
     setImg({
       preview: URL.createObjectURL(target.files[0]),
       raw: target.files[0],
