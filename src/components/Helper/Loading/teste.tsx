@@ -1,28 +1,6 @@
-import { useEffect, useState } from 'react';
 import styles from './Loading.module.css';
 
 const Loading = () => {
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    function updateStep() {
-      setStep((step) => {
-        if (step < 3) return step + 1;
-        else return 0;
-      });
-    }
-    const interval = setInterval(updateStep, 300);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  function displayStep(i: number) {
-    return {
-      display: step === i ? 'block' : 'none',
-    };
-  }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.loading}>
@@ -34,26 +12,24 @@ const Loading = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g clip-path="url(#clip0_1_2)">
-            <g style={displayStep(0)}>
-              <rect
-                x="498"
-                y="131"
-                width="42"
-                height="142"
-                rx="16"
-                fill="black"
-              />
-              <rect
-                x="709.007"
-                y="209.419"
-                width="42"
-                height="142"
-                rx="16"
-                transform="rotate(48.3528 709.007 209.419)"
-                fill="black"
-              />
-            </g>
-            <g style={displayStep(1)}>
+            <rect
+              x="498"
+              y="131"
+              width="42"
+              height="142"
+              rx="16"
+              fill="black"
+            />
+            <rect
+              x="709.007"
+              y="209.419"
+              width="42"
+              height="142"
+              rx="16"
+              transform="rotate(48.3528 709.007 209.419)"
+              fill="black"
+            />
+            <g>
               <rect
                 x="790.084"
                 y="384.284"
@@ -73,7 +49,7 @@ const Loading = () => {
                 fill="black"
               />
             </g>
-            <g style={displayStep(2)}>
+            <g>
               <rect
                 x="498"
                 y="528"
@@ -92,7 +68,7 @@ const Loading = () => {
                 fill="black"
               />
             </g>
-            <g style={displayStep(3)}>
+            <g>
               <rect
                 x="393.084"
                 y="384.284"
