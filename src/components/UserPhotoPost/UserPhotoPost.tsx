@@ -7,15 +7,16 @@ import api from '../../api/api';
 import Error from '../Helper/Error/Error';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import Head from '../Helper/Head';
 
 const UserPhotoPost = () => {
   const caption = useForm();
-  const [img, setImg] = useState({});
+  const [img, setImg] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [photoData, setPhotoData] = useState(null);
   const navigate = useNavigate();
-  const { data } = useContext(UserContext);
+  const { data } = useContext<any>(UserContext);
 
   useEffect(() => {
     if (photoData) navigate('/conta');
@@ -29,7 +30,7 @@ const UserPhotoPost = () => {
     formData.append('username', data.username);
     formData.append('caption', caption.value);
 
-    const token: string = window.localStorage.getItem('access_token');
+    const token = window.localStorage.getItem('access_token');
 
     if (token) {
       try {
@@ -41,7 +42,7 @@ const UserPhotoPost = () => {
           },
         });
         setPhotoData(res.data);
-      } catch (error) {
+      } catch (error: any) {
         setError(error.message);
       } finally {
         setLoading(false);
@@ -49,34 +50,37 @@ const UserPhotoPost = () => {
     }
   }
 
-  function handleImgChange({ target }): void {
+  function handleImgChange({ target }: any): void {
     const file = target.files[0];
 
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        const img = new Image();
-        img.src = e.target.result;
+        const img: any = new Image();
+        img.src = e.target ? e.target.result : null;
         img.onload = function () {
           const canvas = document.createElement('canvas');
           const size = Math.min(img.width, img.height);
-          canvas.width = size;
-          canvas.height = size;
-          const ctx = canvas.getContext('2d');
+          if (canvas) {
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
 
-          const startX = (img.width - size) / 2;
-          const startY = (img.height - size) / 2;
-          ctx.drawImage(img, startX, startY, size, size, 0, 0, size, size);
+            const startX = (img.width - size) / 2;
+            const startY = (img.height - size) / 2;
+            ctx
+              ? ctx.drawImage(img, startX, startY, size, size, 0, 0, size, size)
+              : '';
 
-          // Converter o canvas para um blob
-          canvas.toBlob((blob) => {
-            if (blob) {
-              setImg({
-                preview: URL.createObjectURL(blob),
-                raw: new File([blob], file.name, { type: file.type }),
-              });
-            }
-          }, file.type);
+            canvas.toBlob((blob) => {
+              if (blob) {
+                setImg({
+                  preview: URL.createObjectURL(blob),
+                  raw: new File([blob], file.name, { type: file.type }),
+                });
+              }
+            }, file.type);
+          }
         };
       };
       reader.readAsDataURL(file);
@@ -90,6 +94,7 @@ const UserPhotoPost = () => {
 
   return (
     <section className={`${styles.photoPost} animeLeft`}>
+      <Head title="Poste sua foto" description="Página para postar uma foto" />
       <form onSubmit={handleSubmit}>
         <Input label="Legenda" type="text" name="legenda" {...caption} />
         <input

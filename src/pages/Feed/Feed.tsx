@@ -1,16 +1,25 @@
 import { useState } from 'react';
 import FeedModal from '../../components/FeedModal/FeedModal';
 import FeedPhotos from '../../components/FeedPhotos/FeedPhotos';
-import styles from './Feed.module.css';
 
 const Feed = () => {
   const [modalPhoto, setModalPhoto] = useState(null);
+  const [reload, setReload] = useState(false);
+
+  function updateFeed() {
+    setReload((prev) => !prev);
+  }
+
   return (
     <div>
       {modalPhoto && (
-        <FeedModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
+        <FeedModal
+          photo={modalPhoto}
+          setModalPhoto={setModalPhoto}
+          updateFeed={updateFeed}
+        />
       )}
-      <FeedPhotos setModalPhoto={setModalPhoto} />
+      <FeedPhotos setModalPhoto={setModalPhoto} reload={reload} />
     </div>
   );
 };

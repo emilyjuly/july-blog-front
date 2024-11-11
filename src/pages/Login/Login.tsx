@@ -1,16 +1,15 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import LoginForm from "../LoginForm/LoginForm";
-import LoginCreate from "../LoginCreate/LoginCreate";
-import LoginPasswordLost from "../LoginPasswordLost/LoginPasswordLost";
-import LoginPasswordReset from "../LoginPasswordReset/LoginPasswordReset";
+import LoginForm from '../LoginForm/LoginForm';
+import LoginCreate from '../LoginCreate/LoginCreate';
 
-import styles from "./Login.module.css";
+import styles from './Login.module.css';
+import NotFound from '../../components/Helper/NotFound/NotFound';
 
 const Login = () => {
-  const { isLogged } = useContext(UserContext);
+  const { isLogged } = useContext<any>(UserContext);
 
   if (isLogged) return <Navigate to="/conta" />;
   return (
@@ -19,8 +18,7 @@ const Login = () => {
         <Routes>
           <Route path="/" element={<LoginForm />} />
           <Route path="criar" element={<LoginCreate />} />
-          <Route path="perdeu" element={<LoginPasswordLost />} />
-          <Route path="resetar" element={<LoginPasswordReset />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </section>

@@ -6,8 +6,8 @@ import { UserContext } from '../../context/UserContext';
 import PhotoDelete from '../PhotoDelete/PhotoDelete';
 import Image from '../Helper/Image/Image';
 
-const PhotoContent = ({ photo }) => {
-  const { data } = useContext(UserContext);
+const PhotoContent = ({ photo }: any) => {
+  const { data } = useContext<any>(UserContext);
   const url: string = `http://localhost:3000/${photo.Photo.path}`;
 
   return (
@@ -19,13 +19,15 @@ const PhotoContent = ({ photo }) => {
             {data && data.username === photo.username ? (
               <PhotoDelete id={photo.id} />
             ) : (
-              <Link to={`/perfil/${photo.userId}`}>@{photo.username}</Link>
+              <Link to={`/perfil/${photo.username}/${photo.userId}`}>
+                @{photo.username}
+              </Link>
             )}
-            <span>{photo.caption}</span>
           </p>
           <h1 className="title">
             <p>{photo.username}</p>
           </h1>
+          <span className={styles.caption}>{photo.caption}</span>
         </div>
         <PhotoComments photo={photo} />
       </div>

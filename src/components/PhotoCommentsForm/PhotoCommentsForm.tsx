@@ -1,26 +1,25 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './PhotoCommentsForm.module.css';
 import send from '../../assets/send.svg';
 import { UserContext } from '../../context/UserContext';
 import api from '../../api/api';
 import Error from '../Helper/Error/Error';
-import { ReactSVG } from 'react-svg';
 
-const PhotoCommentsForm = ({ id, setComments }) => {
+const PhotoCommentsForm = ({ id, setComments }: any) => {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { data } = useContext(UserContext);
+  const { data } = useContext<any>(UserContext);
 
   async function handleSubmit(
     event: React.FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
-    const token: string = window.localStorage.getItem('access_token');
+    const token = window.localStorage.getItem('access_token');
 
     if (token) {
       try {
-        setLoading(true);
+        if (!loading) setLoading(true);
         const res = await api.post(
           '/comments',
           {
@@ -37,8 +36,8 @@ const PhotoCommentsForm = ({ id, setComments }) => {
           },
         );
         setComment('');
-        setComments((comments) => [...comments, res.data]);
-      } catch (error) {
+        setComments((comments: any) => [...comments, res.data]);
+      } catch (error: any) {
         setError(error.message);
       } finally {
         setLoading(false);

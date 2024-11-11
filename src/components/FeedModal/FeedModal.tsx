@@ -1,9 +1,12 @@
 import PhotoContent from '../PhotoContent/PhotoContent';
 import styles from './FeedModal.module.css';
 
-const FeedModal = ({ photo, setModalPhoto }) => {
-  function handleOutsideClick(event) {
-    if (event.target === event.currentTarget) setModalPhoto(null);
+const FeedModal = ({ photo, setModalPhoto, updateFeed }: any) => {
+  function handleOutsideClick(event: any) {
+    if (event.target === event.currentTarget) {
+      setModalPhoto(null);
+      updateFeed();
+    }
   }
 
   return (

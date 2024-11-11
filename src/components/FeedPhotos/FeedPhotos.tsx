@@ -7,28 +7,33 @@ import Error from '../Helper/Error/Error';
 import Loading from '../Helper/Loading/Loading';
 import { useLocation } from 'react-router-dom';
 
-const FeedPhotos = ({ setModalPhoto }) => {
-  const [loading, setLoading] = useState(null);
+const FeedPhotos = ({
+  setModalPhoto,
+  reload,
+  isFromUserProfile,
+  userId,
+}: any) => {
+  const [loading, setLoading] = useState<boolean | null>(null);
   const [error, setError] = useState(null);
-  const [photos, setPhotos] = useState(null);
-  const { data } = useContext(UserContext);
+  const [photos, setPhotos] = useState<any | null>(null);
+  const { data } = useContext<any>(UserContext);
   const location = useLocation();
 
   useEffect(() => {
     async function fetchPhotos() {
       setLoading(true);
 
-      if (location.pathname.includes('/conta')) {
-        const token: string = window.localStorage.getItem('access_token');
+      if (location.pathname.includes('/conta') || isFromUserProfile) {
+        const token = window.localStorage.getItem('access_token');
         if (token) {
           try {
-            const res = await api.get(`/posts/${data.id}`, {
+            const res = await api.get(`/posts/${userId ? userId : data.id}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             });
             setPhotos(res.data);
-          } catch (error) {
+          } catch (error: any) {
             setError(error.message);
           } finally {
             setLoading(false);
@@ -38,7 +43,7 @@ const FeedPhotos = ({ setModalPhoto }) => {
         try {
           const res = await api.get(`/posts`);
           setPhotos(res.data);
-        } catch (error) {
+        } catch (error: any) {
           setError(error.message);
         } finally {
           setLoading(false);
@@ -46,14 +51,14 @@ const FeedPhotos = ({ setModalPhoto }) => {
       }
     }
     fetchPhotos();
-  }, [data]);
+  }, [data, reload, isFromUserProfile]);
 
   if (error) return <Error message={error} />;
   if (loading) return <Loading />;
   if (photos)
     return (
       <ul className={`${styles.feed} animeLeft`}>
-        {photos.map((photo) => (
+        {photos.map((photo: any) => (
           <FeedPhotosItem
             key={photo.id}
             photo={photo}

@@ -2,26 +2,25 @@ import { useState } from 'react';
 import styles from './PhotoDelete.module.css';
 import api from '../../api/api';
 
-const PhotoDelete = ({ id }) => {
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState('');
+const PhotoDelete = ({ id }: any) => {
+  const [loading, setLoading] = useState<boolean | null>(null);
 
   async function handleClick(): Promise<void> {
     const confirm = window.confirm('Tem certeza que deseja deletar esta foto?');
     if (confirm) {
-      const token: string = window.localStorage.getItem('access_token');
+      const token = window.localStorage.getItem('access_token');
       if (token) {
         try {
           setLoading(true);
-          const res = await api.delete(`/photos/${id}`, {
+          await api.delete(`/photos/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           });
           window.location.reload();
-        } catch (error) {
-          setError(error.message);
+        } catch (error: any) {
+          console.log(error);
         } finally {
           setLoading(false);
         }

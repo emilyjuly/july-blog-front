@@ -26,6 +26,14 @@
   overflow: auto;
 }
 
+.caption {
+  color: gray;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
 @keyframes scaleUp {
   to {
     opacity: initial;

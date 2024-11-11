@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
 import styles from './FeedPhotosItem.module.css';
 import Image from '../Helper/Image/Image';
 
-const FeedPhotosItem = ({ photo, setModalPhoto }) => {
+const FeedPhotosItem = ({ photo, setModalPhoto }: any) => {
   const url: string = `http://localhost:3000/${photo.Photo.path}`;
 
   function handleClick() {
