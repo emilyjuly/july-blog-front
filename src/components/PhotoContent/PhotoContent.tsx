@@ -8,7 +8,7 @@ import Image from '../Helper/Image/Image';
 
 const PhotoContent = ({ photo }: any) => {
   const { data } = useContext<any>(UserContext);
-  const url: string = `http://localhost:3000/${photo.Photo.path}`;
+  const url: string = `https://july-blog-api.onrender.com/${photo.Photo.path}`;
 
   return (
     <div className={styles.photoContentContainer}>
